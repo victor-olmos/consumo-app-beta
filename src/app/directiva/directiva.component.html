@@ -1,0 +1,11 @@
+<div class="card">
+    <button type="button" (click)="habilitar = (habilitar == true)? false: true" class="btn btn-primary my-3" > Ocultar </button>
+    <div class="card-header">
+        lista de cosas
+    </div>
+    <ul class="list-group" *ngIf="habilitar == true" >
+        <li class="list-group-item" *ngFor="let cosas of listado">{{ cosas }}</li>
+    </ul>
+
+    
+</div>
