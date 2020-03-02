@@ -11,9 +11,25 @@ import {RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './clientes/form.component';
 import {FormsModule} from  '@angular/forms';
+import {registerLocaleData} from '@angular/common';
+import localeES from '@angular/common/locales/es';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
+import { RegisterService } from './auth/register/register.service';
 
+registerLocaleData(localeES, 'es');
 const routes: Routes =[
-  {path:'',redirectTo:'/clientes',pathMatch:'full'},
+  
+  /*{path:'',redirectTo:'/clientes',pathMatch:'full'},*/
+/********Componentes aplicacion************* */
+  {path:'',redirectTo:'/login',pathMatch:'full'},
+  {path: 'login', component: LoginComponent},
+
+  {path: 'register', component: RegisterComponent},
+  {path: 'resetpassword', component: ResetpasswordComponent},
+
+
   {path:'directivas', component: DirectivaComponent},
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
@@ -29,6 +45,9 @@ const routes: Routes =[
     DirectivaComponent,
     ClientesComponent,
     FormComponent,
+    LoginComponent,
+    RegisterComponent,
+    ResetpasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +55,7 @@ const routes: Routes =[
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [ClienteService],
+  providers: [ClienteService,RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
