@@ -1,4 +1,4 @@
-import { Resetpassword } from '../resetpassword/resetpassword';
+import { Resetpassword } from './resetpassword/resetpassword';
 
 describe('Resetpassword', () => {
   it('should create an instance', () => {

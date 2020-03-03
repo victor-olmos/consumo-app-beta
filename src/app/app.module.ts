@@ -13,10 +13,11 @@ import { FormComponent } from './clientes/form.component';
 import {FormsModule} from  '@angular/forms';
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/account/login.component';
+import { RegisterComponent } from './auth/account/register.component';
 import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
-import { RegisterService } from './auth/register/register.service';
+import { AccountComponent } from './auth/account/account.component';
+import { AccountService } from './auth/account/account.service';
 
 registerLocaleData(localeES, 'es');
 const routes: Routes =[
@@ -48,6 +49,7 @@ const routes: Routes =[
     LoginComponent,
     RegisterComponent,
     ResetpasswordComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ const routes: Routes =[
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [ClienteService,RegisterService],
+  providers: [ClienteService,AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

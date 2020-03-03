@@ -1,4 +1,4 @@
-import { Login } from './login';
+import { Login } from '../account/login';
 
 describe('Login', () => {
   it('should create an instance', () => {

@@ -1,25 +1,26 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Register} from './register';
-import { RegisterService } from './register.service';
+import {Account} from './account'
 import swal from 'sweetalert2';
 import {tap} from 'rxjs/operators';
 import { pipe } from 'rxjs';
 import { Router } from '@angular/router';
+import { AccountService } from './account.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./account.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
 
-    private register: Register = new Register()
+  private account: Account = new Account()
+    //private register: Register = new Register()
     private titulo:string = "crear cuenta";
     private errores: string[];
     private mensajes: string[];
 
-  constructor(private registerService: RegisterService,
+  constructor(private accountService: AccountService,
     private router:Router) { }
 
   ngOnInit() {
@@ -27,8 +28,8 @@ export class RegisterComponent implements OnInit {
 
   public create():void{
    
-    this.register.enable = true;
-    this.registerService.create(this.register).subscribe(register => {
+    
+    this.accountService.create(this.account).subscribe(register => {
       this.router.navigate(['/login'])
       //falta poner alerta
     },
