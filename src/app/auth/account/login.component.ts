@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     
+    if (this.accountService.isAuthenticated()) {
+      swal.fire('login', `hi ${this.accountService.account.username} ya estas logeado`, 'info')
+      this.router.navigate(['/resetpassword']);
+      
+    }
     
   }
 
@@ -32,15 +37,30 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.accountService.login(this.account).subscribe(response => {
+      console.log(response);
+     // console.log(response.access_token);
+      //guardo la informacion que viene en el token en payload antes, lo parseo a un json
+      let payload = JSON.parse(atob(response.access_token.split(".")[1]));
+      //console.log(payload);
+
+     
+      
       this.accountService.guardarCuenta(response.access_token);
       this.accountService.guardarToken(response.access_token);
       let account = this.accountService.account;
       //let payload = JSON.parse(atob(response.access_token.split(".")[1]));
            // console.log(account.email);
-            
+      let cuenta = this.accountService.account;
       this.router.navigate(['/register']);
-      swal.fire('login',`hola ${account.username}, has iniciado secion`, 'success');
-    });
+      //tuve un error, tuve que acar el usuario del token, ya que por back me trae como username el email
+      swal.fire('login',`hola ${cuenta.username}, has iniciado secion`, 'success');
+    },
+    err =>{
+      if (err.status = 400) {
+        swal.fire('Error', 'usuario o password incorrectas','error');
+      }
+    }
+    );
     
   }
 

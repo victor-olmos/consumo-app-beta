@@ -77,12 +77,9 @@ export class AccountService{
       guardarCuenta(accessToken: string):void{
         let payload = this.obtenerDatosToken(accessToken);
         this._account = new Account();
-        this._account.username = payload.user_name;
+        this._account.username = payload.usuario;
         this._account.email = payload.email;
-        this._account.enable = payload.enable;
-
         sessionStorage.setItem('account', JSON.stringify(this._account));
-
       }
 
       guardarToken(accessToken: string):void{
@@ -94,5 +91,14 @@ export class AccountService{
         if (accessToken != null) {
           return JSON.parse(atob(accessToken.split(".")[1]));
         }
+      }
+
+      isAuthenticated():boolean{
+        let payload = this.obtenerDatosToken(this.token);
+        if (payload !=null && payload.user_name && payload.user_name.length>0){
+          return true;
+        }
+        return false;
+
       }
 }
